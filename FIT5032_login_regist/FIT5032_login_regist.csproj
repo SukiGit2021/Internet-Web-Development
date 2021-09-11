@@ -176,10 +176,43 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>property.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Booking.cs">
+      <DependentUpon>property.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\comment.cs">
+      <DependentUpon>property.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>property.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB_Entities.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\property.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>property.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\property.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>property.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\property.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>property.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Property_desc.cs">
+      <DependentUpon>property.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRoles.cs">
+      <DependentUpon>property.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -187,6 +220,10 @@
     <Content Include="App_Data\DatabaseMVC5.mdf" />
     <Content Include="App_Data\DatabaseMVC5_log.ldf">
       <DependentUpon>DatabaseMVC5.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\Property.mdf" />
+    <Content Include="App_Data\Property_log.ldf">
+      <DependentUpon>Property.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -196,8 +233,26 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\property.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>property.Context.cs</LastGenOutput>
+      <DependentUpon>property.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\property.edmx.sql" />
+    <Content Include="Models\property.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>property.cs</LastGenOutput>
+      <DependentUpon>property.edmx</DependentUpon>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\property.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>property.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\property.edmx.diagram">
+      <DependentUpon>property.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -246,7 +301,9 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

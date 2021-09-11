@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8074dbc80b654493911cce04ccc083b5" Name="Diagram1" DisplayType="true" ShowGrid="true" >
+        <EntityTypeShape EntityType="property.UserRoles" Width="1.5" PointX="2.25" PointY="3.375" />
+        <EntityTypeShape EntityType="property.Property" Width="2.125" PointX="8.5" PointY="0.625" />
+        <EntityTypeShape EntityType="property.Property_desc" Width="1.875" PointX="10.75" PointY="0.625" />
+        <AssociationConnector Association="property.PropertyProperty_desc" />
+        <EntityTypeShape EntityType="property.Customer" Width="2" PointX="5.125" PointY="4" />
+        <EntityTypeShape EntityType="property.Admin" Width="1.875" PointX="3.625" PointY="0.5" />
+        <AssociationConnector Association="property.UserRolesAdmin" />
+        <AssociationConnector Association="property.UserRolesCustomer" />
+        <EntityTypeShape EntityType="property.Booking" Width="2.125" PointX="8.625" PointY="4.125" />
+        <AssociationConnector Association="property.CustomerBooking" />
+        <AssociationConnector Association="property.BookingProperty" />
+        <EntityTypeShape EntityType="property.comment" Width="1.875" PointX="6.125" PointY="0.625" />
+        <AssociationConnector Association="property.commentProperty" />
+        <AssociationConnector Association="property.Customercomment" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
