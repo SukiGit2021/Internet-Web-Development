@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/14/2021 21:41:21
+-- Date Created: 10/08/2021 15:02:25
 -- Generated from EDMX file: C:\Users\Suki\source\repos\FIT5032_Ass\FIT5032_Ass\Models\Ass.edmx
 -- --------------------------------------------------
 
@@ -99,7 +99,11 @@ CREATE TABLE [dbo].[BookingSet] (
     [comment] nvarchar(max)  NULL,
     [AspNetUsersId] nvarchar(128)  NOT NULL,
     [PropertyId] int  NOT NULL,
-    [AgencyId] int  NOT NULL
+    [AgencyId] int  NOT NULL,
+    [rating] nvarchar(max)  NOT NULL,
+    [OrderHide] nvarchar(max)  NOT NULL,
+    [OrderStatus] nvarchar(max)  NOT NULL,
+    [OrderDate] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -112,7 +116,8 @@ CREATE TABLE [dbo].[PropertySet] (
     [address] nvarchar(max)  NOT NULL,
     [description] nvarchar(max)  NOT NULL,
     [AspNetUsersId] nvarchar(128)  NOT NULL,
-    [AgencyId] int  NOT NULL
+    [AgencyId] int  NOT NULL,
+    [PropertySize_Id] int  NOT NULL
 );
 GO
 
@@ -125,7 +130,17 @@ CREATE TABLE [dbo].[AgencySet] (
     [longitude] float  NOT NULL,
     [year] int  NOT NULL,
     [ranking] int  NULL,
-    [description] nvarchar(max)  NOT NULL
+    [description] nvarchar(max)  NOT NULL,
+    [rating] nvarchar(max)  NOT NULL,
+    [rating_mean] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'PropertySizeSet'
+CREATE TABLE [dbo].[PropertySizeSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [PropertyType] nvarchar(max)  NOT NULL,
+    [PropertyDescription] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -167,6 +182,12 @@ GO
 -- Creating primary key on [Id] in table 'AgencySet'
 ALTER TABLE [dbo].[AgencySet]
 ADD CONSTRAINT [PK_AgencySet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'PropertySizeSet'
+ALTER TABLE [dbo].[PropertySizeSet]
+ADD CONSTRAINT [PK_PropertySizeSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -277,6 +298,21 @@ GO
 CREATE INDEX [IX_FK_BookingAgency]
 ON [dbo].[BookingSet]
     ([AgencyId]);
+GO
+
+-- Creating foreign key on [PropertySize_Id] in table 'PropertySet'
+ALTER TABLE [dbo].[PropertySet]
+ADD CONSTRAINT [FK_PropertyPropertySize]
+    FOREIGN KEY ([PropertySize_Id])
+    REFERENCES [dbo].[PropertySizeSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PropertyPropertySize'
+CREATE INDEX [IX_FK_PropertyPropertySize]
+ON [dbo].[PropertySet]
+    ([PropertySize_Id]);
 GO
 
 -- --------------------------------------------------

@@ -22,6 +22,10 @@ namespace FIT5032_Ass.Models
         public string AspNetUsersId { get; set; }
         public int PropertyId { get; set; }
         public int AgencyId { get; set; }
+        public Nullable<int> rating { get; set; }
+        public string OrderHide { get; set; }
+        public string OrderStatus { get; set; }
+        public string OrderDate { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Property Property { get; set; }

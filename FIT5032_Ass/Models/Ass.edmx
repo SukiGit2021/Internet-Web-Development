@@ -11,6 +11,7 @@
     <EntitySet Name="BookingSet" EntityType="Model.Store.BookingSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PropertySet" EntityType="Model.Store.PropertySet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AgencySet" EntityType="Model.Store.AgencySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PropertySizeSet" EntityType="Model.Store.PropertySizeSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AspNetUserRoles" EntityType="Model.Store.AspNetUserRoles" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="Model.Store.FK_AspNetUserRoles_AspNetRoles">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -39,6 +40,10 @@
     <AssociationSet Name="BookingAgency" Association="Model.Store.BookingAgency">
       <End Role="Booking" EntitySet="BookingSet" />
       <End Role="Agency" EntitySet="AgencySet" />
+    </AssociationSet>
+    <AssociationSet Name="PropertyPropertySize" Association="Model.Store.PropertyPropertySize">
+      <End Role="Property" EntitySet="PropertySet" />
+      <End Role="PropertySize" EntitySet="PropertySizeSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="AspNetRoles">
@@ -77,6 +82,10 @@
     <Property Name="AspNetUsersId" Type="nvarchar" Nullable="false" MaxLength="128" />
     <Property Name="PropertyId" Type="int" Nullable="false" />
     <Property Name="AgencyId" Type="int" Nullable="false" />
+    <Property Name="rating" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OrderHide" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OrderStatus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OrderDate" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PropertySet">
     <Key>
@@ -90,6 +99,7 @@
     <Property Name="description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="AspNetUsersId" Type="nvarchar" Nullable="false" MaxLength="128" />
     <Property Name="AgencyId" Type="int" Nullable="false" />
+    <Property Name="PropertySize_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AgencySet">
     <Key>
@@ -103,6 +113,16 @@
     <Property Name="year" Type="int" Nullable="false" />
     <Property Name="ranking" Type="int" Nullable="true" />
     <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="rating" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="rating_mean" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PropertySizeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PropertyType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PropertyDescription" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="AspNetUserRoles">
     <Key>
@@ -169,6 +189,18 @@
       </Principal>
       <Dependent Role="Booking">
         <PropertyRef Name="AgencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PropertyPropertySize">
+    <End Role="Property" Type="Model.Store.PropertySet" Multiplicity="*" />
+    <End Role="PropertySize" Type="Model.Store.PropertySizeSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="PropertySize">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Property">
+        <PropertyRef Name="PropertySize_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -262,6 +294,11 @@
             <End Role="Booking" EntitySet="BookingSet" />
             <End Role="Agency" EntitySet="AgencySet" />
           </AssociationSet>
+          <EntitySet Name="PropertySizeSet" EntityType="Model.PropertySize" />
+          <AssociationSet Name="PropertyPropertySize" Association="Model.PropertyPropertySize">
+            <End Role="Property" EntitySet="PropertySet" />
+            <End Role="PropertySize" EntitySet="PropertySizeSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Booking">
           <Key>
@@ -278,6 +315,10 @@
           <Property Name="PropertyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Agency" Relationship="Model.BookingAgency" FromRole="Booking" ToRole="Agency" />
           <Property Name="AgencyId" Type="Int32" Nullable="false" />
+          <Property Name="rating" Type="Int32" Nullable="true" />
+          <Property Name="OrderHide" Type="String" Nullable="false" />
+          <Property Name="OrderStatus" Type="String" Nullable="false" />
+          <Property Name="OrderDate" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Property">
           <Key>
@@ -294,6 +335,7 @@
           <NavigationProperty Name="Booking" Relationship="Model.PropertyBooking" FromRole="Property" ToRole="Booking" />
           <NavigationProperty Name="Agency" Relationship="Model.PropertyAgency" FromRole="Property" ToRole="Agency" />
           <Property Name="AgencyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PropertySize" Relationship="Model.PropertyPropertySize" FromRole="Property" ToRole="PropertySize" />
         </EntityType>
         <EntityType Name="Agency">
           <Key>
@@ -306,9 +348,11 @@
           <Property Name="longitude" Type="Double" Nullable="false" />
           <Property Name="year" Type="Int32" Nullable="false" />
           <Property Name="ranking" Type="Int32" Nullable="true" />
-          <Property Name="description" Type="String" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="true" />
           <NavigationProperty Name="Property" Relationship="Model.PropertyAgency" FromRole="Agency" ToRole="Property" />
           <NavigationProperty Name="Booking" Relationship="Model.BookingAgency" FromRole="Agency" ToRole="Booking" />
+          <Property Name="rating" Type="Int32" Nullable="true" />
+          <Property Name="rating_mean" Type="Int32" Nullable="true" />
         </EntityType>
         <Association Name="AspNetUsersBooking">
           <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
@@ -370,6 +414,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PropertySize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropertyType" Type="String" Nullable="false" />
+          <Property Name="PropertyDescription" Type="String" Nullable="true" />
+          <NavigationProperty Name="Property" Relationship="Model.PropertyPropertySize" FromRole="PropertySize" ToRole="Property" />
+        </EntityType>
+        <Association Name="PropertyPropertySize">
+          <End Type="Model.Property" Role="Property" Multiplicity="*" />
+          <End Type="Model.PropertySize" Role="PropertySize" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -413,6 +470,10 @@
           <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
           <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
           <ScalarProperty Name="AgencyId" ColumnName="AgencyId" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="OrderHide" ColumnName="OrderHide" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -441,6 +502,17 @@
           <ScalarProperty Name="year" ColumnName="year" />
           <ScalarProperty Name="ranking" ColumnName="ranking" />
           <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="rating_mean" ColumnName="rating_mean" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PropertySizeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PropertySize)">
+        <MappingFragment StoreEntitySet="PropertySizeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PropertyType" ColumnName="PropertyType" />
+          <ScalarProperty Name="PropertyDescription" ColumnName="PropertyDescription" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -450,6 +522,14 @@
       </EndProperty>
       <EndProperty Name="AspNetUsers">
         <ScalarProperty Name="Id" ColumnName="AspNetUsers_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PropertyPropertySize" TypeName="Model.PropertyPropertySize" StoreEntitySet="PropertySet">
+      <EndProperty Name="PropertySize">
+        <ScalarProperty Name="Id" ColumnName="PropertySize_Id" />
+      </EndProperty>
+      <EndProperty Name="Property">
+        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

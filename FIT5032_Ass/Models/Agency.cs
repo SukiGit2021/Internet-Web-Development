@@ -29,6 +29,8 @@ namespace FIT5032_Ass.Models
         public int year { get; set; }
         public Nullable<int> ranking { get; set; }
         public string description { get; set; }
+        public Nullable<int> rating { get; set; }
+        public Nullable<int> rating_mean { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Property> Property { get; set; }
