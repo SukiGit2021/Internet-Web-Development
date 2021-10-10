@@ -18,6 +18,7 @@ namespace FIT5032_Ass_version7.Models
 
         [Required(ErrorMessage = "Please enter the contents")]
         public string Contents { get; set; }
+        public HttpPostedFileBase Upload { get; set; }
 
     }
 }

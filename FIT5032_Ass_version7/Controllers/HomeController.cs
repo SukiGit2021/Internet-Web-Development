@@ -36,7 +36,7 @@ namespace FIT5032_Ass_version7.Controllers
         }
 
         [HttpPost]
-        public ActionResult Send_Email(SendEmailViewModel model)
+        public ActionResult Send_Email(SendEmailViewModel model,HttpPostedFileBase postedFileBase)
         {
             if (ModelState.IsValid)
             {
@@ -47,7 +47,7 @@ namespace FIT5032_Ass_version7.Controllers
                     String contents = model.Contents;
 
                     EmailSender es = new EmailSender();
-                    es.Send(toEmail, subject, contents);
+                    es.Send(toEmail, subject, contents,postedFileBase);
 
                     ViewBag.Result = "Email has been send.";
 
