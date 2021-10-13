@@ -19,7 +19,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.startDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.startDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.startDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "datepickerstart" } })
                 @Html.ValidationMessageFor(model => model.startDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.endDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.endDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.endDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "datepickerend" } })
                 @Html.ValidationMessageFor(model => model.endDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,26 +56,26 @@
                 </div>
             </div>*@
 
-        <div class="form-group">
+     @*   <div class="form-group">
             @Html.LabelFor(model => model.OrderHide, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.OrderHide, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OrderHide, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
+     @*   <div class="form-group">
             @Html.LabelFor(model => model.OrderStatus, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.OrderStatus, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OrderStatus, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.OrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "datepickerorder",@Value = DateTime.Now,@readonly="readonly" } })
                 @Html.ValidationMessageFor(model => model.OrderDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -98,9 +98,6 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Send email", "Send_Email", "Home")
-</div>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -108,18 +105,54 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-   @* <script>
-        $(function () {
-            $("#startDate").datepicker();
-            $("#startDate").datepicker("setDate", new Date.now);
-    });
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script>
+        $("#datepickerstart").datepicker({
+            "format": "yyyy/mm/dd",
+            "autoclose": true,
+            "startDate": "d",
+            "startView": 1,
+            "maxViewMode": 2,
+            "clearBtn": true,
+            "todayBtn": "linked",
+        })
     </script>
     <script>
-        $(function () {
-
-            $("#endDate").datepicker("setDate", "@DateTime.Now.AddDays(2)");
-        });
+        $("#datepickerend").datepicker({
+            "format": "yyyy/mm/dd",
+            "autoclose": true,
+            "startView": 1,
+            "maxViewMode": 2,
+            "clearBtn": true,
+            "todayBtn": "linked",
+            }
+            
+        })
+    </script>
+  @*  <script>
+        $("#datepickerorder").datepicker({
+            "format": "yyyy/mm/dd",
+        }).datepicker("setDate", "now");
     </script>*@
+    @*    <script>
+            $(function () {
+                $("#datepicker").datepicker();
+                $("#datepicker").datepicker("setDate", new Date.now);
+            })
+        </script>*@
+    @* <script>
+            $(function () {
+                $("#startDate").datepicker();
+                $("#startDate").datepicker("setDate", new Date.now);
+        });
+        </script>
+        <script>
+            $(function () {
+
+                $("#endDate").datepicker("setDate", "@DateTime.Now.AddDays(2)");
+            });
+        </script>*@
 
 
 }
+<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />

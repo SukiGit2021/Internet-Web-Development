@@ -38,9 +38,9 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Order List", "Index", "Bookings")</li>
-                   
+
                         <li> @Html.ActionLink("Send email", "Send_Email", "Home")</li>
-                       
+
                     }
 
                     <li>@Html.ActionLink("About", "About", "Home")</li>
@@ -61,6 +61,14 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    @section Scripts{
+
+        <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+        <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+        <script>$(document).ready(function () { $('.table').DataTable(); });</script>
+    }
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
 
 </body>
 </html>
