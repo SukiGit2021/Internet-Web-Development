@@ -33,6 +33,7 @@ namespace FIT5032_Ass_version7.Utils
                 string dataAsString = Convert.ToBase64String(fileBytes);
                 msg.AddAttachment(theFileName, dataAsString);
             }
+           
             var response = client.SendEmailAsync(msg);
         }
     }

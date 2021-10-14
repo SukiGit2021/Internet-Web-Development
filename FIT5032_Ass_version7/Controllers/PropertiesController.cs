@@ -17,10 +17,18 @@ namespace FIT5032_Ass_version7.Controllers
         // GET: Properties
         public ActionResult Index(int? id)
         {
-            var propertySet = db.PropertySet.Include(p => p.AspNetUsers).Include(p => p.PropertySize).Include(p => p.Agency).Where(p=>p.AgencyId == id);
-            return View(propertySet.ToList());
-        }
+            if (id != null && id != -99)
+            {
+                var propertySet = db.PropertySet.Include(p => p.AspNetUsers).Include(p => p.PropertySize).Include(p => p.Agency).Where(p => p.AgencyId == id);
 
+                return View(propertySet.ToList());
+            }
+            else {
+                var propertySet = db.PropertySet.Include(p => p.AspNetUsers).Include(p => p.PropertySize).Include(p => p.Agency);
+
+                return View(propertySet.ToList());
+            }
+        }
         // GET: Properties/Details/5
         public ActionResult Details(int? id)
         {
