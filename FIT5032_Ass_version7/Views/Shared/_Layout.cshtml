@@ -21,7 +21,6 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li> @Html.ActionLink("House Agency", "Index", "Agencies")</li>
@@ -43,10 +42,13 @@
 
                         <li> @Html.ActionLink("Rating", "Create", "Ratings")</li>
 
+                        <li> @Html.ActionLink("Date", "dateConstraint", "Home")</li>
+
                     }
 
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li> @Html.ActionLink("Location", "geolocation", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

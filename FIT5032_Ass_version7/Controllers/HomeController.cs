@@ -29,6 +29,21 @@ namespace FIT5032_Ass_version7.Controllers
 
             return View();
         }
+        public ActionResult geolocation()
+        {
+            ViewBag.Message = "map";
+
+            return View();
+        }
+
+        public ActionResult dateConstraint(string date = "1234")
+        {
+            if ("1234" == date)
+                return View();
+            DateTime convertedDate = DateTime.Parse(date);
+            ViewBag.eventDate = convertedDate;
+            return View();
+        }
 
         public ActionResult Send_Email()
         {
