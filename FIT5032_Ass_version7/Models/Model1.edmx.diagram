@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7ce04330d70f48d4be3ba5c4d2e7d581" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="13.375" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Property" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model.Booking" Width="1.5" PointX="3.5" PointY="5.375" />
         <EntityTypeShape EntityType="Model.PropertySize" Width="1.5" PointX="7.375" PointY="1.375" />
@@ -15,6 +15,8 @@
         <AssociationConnector Association="Model.PropertySizeProperty" />
         <AssociationConnector Association="Model.AgencyProperty" />
         <AssociationConnector Association="Model.AspNetUsersBooking" />
+        <EntityTypeShape EntityType="Model.Rating" Width="1.5" PointX="6.5" PointY="5.625" />
+        <AssociationConnector Association="Model.AspNetUsersRating" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

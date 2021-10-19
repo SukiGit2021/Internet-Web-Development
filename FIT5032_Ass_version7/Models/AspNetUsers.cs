@@ -19,6 +19,7 @@ namespace FIT5032_Ass_version7.Models
         {
             this.Property = new HashSet<Property>();
             this.Booking = new HashSet<Booking>();
+            this.Rating = new HashSet<Rating>();
         }
     
         public string Id { get; set; }
@@ -38,5 +39,7 @@ namespace FIT5032_Ass_version7.Models
         public virtual ICollection<Property> Property { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Booking { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Rating> Rating { get; set; }
     }
 }

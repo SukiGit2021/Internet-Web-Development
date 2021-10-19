@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/08/2021 17:54:04
+-- Date Created: 10/19/2021 18:12:49
 -- Generated from EDMX file: C:\Users\Suki\source\repos\FIT5032_Ass_version7\FIT5032_Ass_version7\Models\Model1.edmx
 -- --------------------------------------------------
 
@@ -127,6 +127,15 @@ CREATE TABLE [dbo].[AgencySet] (
 );
 GO
 
+-- Creating table 'RatingSet'
+CREATE TABLE [dbo].[RatingSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [content] nvarchar(max)  NOT NULL,
+    [date] nvarchar(max)  NOT NULL,
+    [AspNetUsersId] nvarchar(128)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -158,6 +167,12 @@ GO
 -- Creating primary key on [Id] in table 'AgencySet'
 ALTER TABLE [dbo].[AgencySet]
 ADD CONSTRAINT [PK_AgencySet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'RatingSet'
+ALTER TABLE [dbo].[RatingSet]
+ADD CONSTRAINT [PK_RatingSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -237,6 +252,21 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUsersBooking'
 CREATE INDEX [IX_FK_AspNetUsersBooking]
 ON [dbo].[BookingSet]
+    ([AspNetUsersId]);
+GO
+
+-- Creating foreign key on [AspNetUsersId] in table 'RatingSet'
+ALTER TABLE [dbo].[RatingSet]
+ADD CONSTRAINT [FK_AspNetUsersRating]
+    FOREIGN KEY ([AspNetUsersId])
+    REFERENCES [dbo].[AspNetUsers]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUsersRating'
+CREATE INDEX [IX_FK_AspNetUsersRating]
+ON [dbo].[RatingSet]
     ([AspNetUsersId]);
 GO
 

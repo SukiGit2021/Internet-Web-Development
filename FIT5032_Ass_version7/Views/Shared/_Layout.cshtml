@@ -29,7 +29,7 @@
 
                     @if (User.IsInRole("admin"))
                     {
-                        <li>@Html.ActionLink("House List", "Index", "Properties",new { id = -99},null)</li>
+                        <li>@Html.ActionLink("House List", "Index", "Properties", new { id = -99 }, null)</li>
                     }
                     @if (User.IsInRole("admin"))
                     {
@@ -40,6 +40,8 @@
                         <li>@Html.ActionLink("Order List", "Index", "Bookings")</li>
 
                         <li> @Html.ActionLink("Send email", "Send_Email", "Home")</li>
+
+                        <li> @Html.ActionLink("Rating", "Create", "Ratings")</li>
 
                     }
 

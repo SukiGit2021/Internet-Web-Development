@@ -30,5 +30,6 @@ namespace FIT5032_Ass_version7.Models
         public virtual DbSet<Booking> BookingSet { get; set; }
         public virtual DbSet<PropertySize> PropertySizeSet { get; set; }
         public virtual DbSet<Agency> AgencySet { get; set; }
+        public virtual DbSet<Rating> RatingSet { get; set; }
     }
 }

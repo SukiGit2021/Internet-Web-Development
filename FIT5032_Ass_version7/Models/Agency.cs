@@ -11,8 +11,7 @@ namespace FIT5032_Ass_version7.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Agency
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,9 +27,6 @@ namespace FIT5032_Ass_version7.Models
         public double longitude { get; set; }
         public int year { get; set; }
         public Nullable<int> ranking { get; set; }
-
-        /*One more validation*/
-        [StringLength(30, ErrorMessage ="Description can not more than 30 characters!")]
         public string description { get; set; }
         public Nullable<int> rating { get; set; }
         public Nullable<int> rating_mean { get; set; }

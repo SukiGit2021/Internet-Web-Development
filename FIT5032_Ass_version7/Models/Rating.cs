@@ -12,19 +12,13 @@ namespace FIT5032_Ass_version7.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PropertySize
+    public partial class Rating
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PropertySize()
-        {
-            this.Property = new HashSet<Property>();
-        }
-    
         public int Id { get; set; }
-        public string PropertyType { get; set; }
-        public string PropertyDescription { get; set; }
+        public string content { get; set; }
+        public string date { get; set; }
+        public string AspNetUsersId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Property> Property { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

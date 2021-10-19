@@ -11,6 +11,7 @@
     <EntitySet Name="BookingSet" EntityType="Model.Store.BookingSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PropertySizeSet" EntityType="Model.Store.PropertySizeSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AgencySet" EntityType="Model.Store.AgencySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RatingSet" EntityType="Model.Store.RatingSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AspNetUsersProperty" Association="Model.Store.AspNetUsersProperty">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Property" EntitySet="PropertySet" />
@@ -30,6 +31,10 @@
     <AssociationSet Name="AspNetUsersBooking" Association="Model.Store.AspNetUsersBooking">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Booking" EntitySet="BookingSet" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUsersRating" Association="Model.Store.AspNetUsersRating">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Rating" EntitySet="RatingSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="AspNetUsers">
@@ -102,6 +107,15 @@
     <Property Name="rating" Type="int" Nullable="true" />
     <Property Name="rating_mean" Type="int" Nullable="true" />
   </EntityType>
+  <EntityType Name="RatingSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="date" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AspNetUsersId" Type="nvarchar" Nullable="false" MaxLength="128" />
+  </EntityType>
   <Association Name="AspNetUsersProperty">
     <End Role="AspNetUsers" Type="Model.Store.AspNetUsers" Multiplicity="1" />
     <End Role="Property" Type="Model.Store.PropertySet" Multiplicity="*" />
@@ -162,6 +176,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="AspNetUsersRating">
+    <End Role="AspNetUsers" Type="Model.Store.AspNetUsers" Multiplicity="1" />
+    <End Role="Rating" Type="Model.Store.RatingSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rating">
+        <PropertyRef Name="AspNetUsersId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -184,6 +210,7 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Property" Relationship="Model.AspNetUsersProperty" FromRole="AspNetUsers" ToRole="Property" />
           <NavigationProperty Name="Booking" Relationship="Model.AspNetUsersBooking" FromRole="AspNetUsers" ToRole="Booking" />
+          <NavigationProperty Name="Rating" Relationship="Model.AspNetUsersRating" FromRole="AspNetUsers" ToRole="Rating" />
         </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
@@ -210,6 +237,11 @@
           <AssociationSet Name="AspNetUsersBooking" Association="Model.AspNetUsersBooking">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Booking" EntitySet="BookingSet" />
+          </AssociationSet>
+          <EntitySet Name="RatingSet" EntityType="Model.Rating" />
+          <AssociationSet Name="AspNetUsersRating" Association="Model.AspNetUsersRating">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Rating" EntitySet="RatingSet" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Property">
@@ -324,6 +356,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="content" Type="String" Nullable="false" />
+          <Property Name="date" Type="String" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model.AspNetUsersRating" FromRole="Rating" ToRole="AspNetUsers" />
+          <Property Name="AspNetUsersId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="AspNetUsersRating">
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="Model.Rating" Role="Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -401,6 +455,16 @@
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="rating" ColumnName="rating" />
           <ScalarProperty Name="rating_mean" ColumnName="rating_mean" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RatingSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Rating)">
+        <MappingFragment StoreEntitySet="RatingSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
