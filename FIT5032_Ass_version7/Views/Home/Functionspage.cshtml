@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Functionspage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Functionspage</h2>
+
+<div class="row" style="margin-top:100px">
+    <div class="col-md-4">
+        <h2>See locations?</h2>
+        <p>
+            Here is location map.
+        </p>
+        <p><a class="btn btn-primary btn-lg" @Html.ActionLink("Map", "geolocation", "Home")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Send Email</h2>
+        <p>Sweet Home provides email service for you.</p>
+        <p><a class="btn btn-primary btn-lg" @Html.ActionLink("Email", "Send_Email", "Home")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Rating Web</h2>
+        <p>Give your feedback, we improve our services.</p>
+        <p><a class="btn btn-primary btn-lg" @Html.ActionLink("Rating", "Create", "Ratings")</p>
+    </div>
+</div>

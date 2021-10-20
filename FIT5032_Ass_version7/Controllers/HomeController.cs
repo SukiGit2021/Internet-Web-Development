@@ -35,6 +35,12 @@ namespace FIT5032_Ass_version7.Controllers
 
             return View();
         }
+        public ActionResult Functionspage()
+        {
+            ViewBag.Message = "Multiple functions";
+
+            return View();
+        }
 
         public ActionResult dateConstraint(string date = "1234")
         {
