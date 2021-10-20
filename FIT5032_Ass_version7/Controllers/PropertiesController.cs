@@ -63,7 +63,7 @@ namespace FIT5032_Ass_version7.Controllers
             if (ModelState.IsValid)
             {
                 db.PropertySet.Add(property);
-                db.SaveChanges();
+                /*db.SaveChanges();*/
                 return RedirectToAction("Index");
             }
 

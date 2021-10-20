@@ -60,7 +60,7 @@ namespace FIT5032_Ass_version7.Controllers
             if (ModelState.IsValid)
             {
                 db.BookingSet.Add(booking);
-                db.SaveChanges();
+                /*db.SaveChanges();*/
                 return RedirectToAction("Index");
             }
 

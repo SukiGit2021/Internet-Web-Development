@@ -57,7 +57,7 @@ namespace FIT5032_Ass_version7.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", rating.AspNetUsersId);
+            /*ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", rating.AspNetUsersId);*/
             return View(rating);
         }
 
